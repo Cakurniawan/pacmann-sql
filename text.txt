@@ -1,0 +1,134 @@
+Features:
+
+Multi-Library Management:
+
+The system will support the administration of multiple libraries, each serving as a distinct entity with its unique collection of books.
+Comprehensive Book Collection:
+
+The database will store detailed information about each book, including titles, authors, and available quantities.
+Books will be categorized into genres such as self-improvement, biography, fantasy, romance, science fiction, etc., enhancing the user's ability to search and discover books.
+User Registration:
+
+Users will have the ability to register on the e-library platform, allowing them to engage in various activities like borrowing books, placing holds, and managing their accounts.
+Loan and Hold System:
+
+Users can borrow books from any library within the application, with a maximum limit of 2 books at a time.
+The loan period is set at 2 weeks, and users can return books earlier than the due date.
+The system will automatically handle book returns after the due date.
+Users can place holds on books that are currently unavailable, and the system will maintain a hold queue.
+A book becomes available for borrowing by the customer at the front of the queue, and if not borrowed within one week, it is released for others to borrow.
+
+
+Limitations:
+While the E-Library Database Project aims to be comprehensive and user-friendly, there are certain limitations:
+
+The system does not provide real-time book availability updates, and users may experience delays in accessing popular books.
+The application does not include a feature for user reviews and ratings of books.
+Detailed user activity analytics are not within the scope of this project.
+
+=-======
+
+After outlining the Mission Statement for the E-Library Database Project, the next step is to design the table structure. 
+In this stage, we will identify the objects needed for this database. These objects can eventually become tables. 
+After identifying the tables and their descriptions, specify the fields and keys for each table. 
+Begin by determining candidate keys, then choose the primary key among these candidates.
+
+=====
+
+tables
+
+1. library
+Fields:
+LibraryID (Primary Key)
+LibraryName
+Location
+
+2. book
+Fields:
+BookID (Primary Key)
+Title
+Author
+QuantityAvailable
+Category
+
+3. User:
+Fields:
+UserID (Primary Key)
+UserName
+Password
+Email
+
+4. transactions
+Fields:
+TransactionID (Primary Key)
+UserID (Foreign Key referencing User table)
+BookID (Foreign Key referencing Book table)
+LoanDate
+DueDate
+ReturnDate
+
+5. HoldQueues:
+Fields:
+HoldID (Primary Key)
+UserID (Foreign Key referencing Users table)
+BookID (Foreign Key referencing Books table)
+HoldDate
+
+Description tables:
+1. Library: Stores information about each library, with LibraryID as the primary key.
+2. Book Table: Contains detailed information about each book, with BookID as the primary key. It includes information about the quantity of available books.
+3. User Table: Contains information about registered users, with UserID as the primary key.
+4. Transaction Table: Records book lending transactions, with TransactionID as the primary key. It also includes information about the loan date, due date, and return date.
+5. HoldQueue Table: Stores information about the hold queue, with HoldID as the primary key. It includes details about the hold date.
+
+
+=====
+
+Now that we have identified the tables for the E-Library Database Project, let's determine the relationships between these tables.
+
+1. Library and Book:
+
+Relationship Type: One-to-Many (1:N)
+Foreign Key: LibraryID in the Book table (connects to LibraryID in the Library table)
+Explanation: One library can have many books, but each book belongs to only one library.
+
+2. User and Transaction:
+
+Relationship Type: One-to-Many (1:N)
+Foreign Key: UserID in the Transaction table (connects to UserID in the User table)
+Explanation: One user can have multiple transactions, but each transaction is associated with only one user.
+
+3. Book and Transaction:
+
+Relationship Type: Many-to-Many (M:N)
+Foreign Keys:
+BookID in the Transaction table (connects to BookID in the Book table)
+UserID in the Transaction table (connects to UserID in the User table)
+Explanation: Many books can be involved in many transactions. This is achieved through an intermediary table (Transaction) connecting books and users.
+
+4. User and HoldQueue:
+
+Relationship Type: One-to-Many (1:N)
+Foreign Key: UserID in the HoldQueue table (connects to UserID in the User table)
+Explanation: One user can have multiple holds, but each hold is associated with only one user.
+
+5. Book and HoldQueue:
+
+Relationship Type: Many-to-Many (M:N)
+Foreign Keys:
+BookID in the HoldQueue table (connects to BookID in the Book table)
+UserID in the HoldQueue table (connects to UserID in the User table)
+Explanation: Many books can be in many hold queues. This is achieved through an intermediary table (HoldQueue) connecting books and users.
+
+
+Additional Notes:
+
+The one-to-many relationships indicate that one record in the first table can be related to multiple records in the second table, but each record in the second table is related to only one record in the first table.
+The many-to-many relationships are implemented using an intermediary table to connect the related records in the two tables.
+These relationships help define how data is shared and connected between the different tables in the database.
+
+
+Foreign Key referencing User table
+BookID: NOT NULL (Foreign Key referencing Book table)
+
+These constraints ensure that the essential columns in each table cannot contain NULL values (where specified), and additional constraints like CHECK are applied to guarantee the integrity and validity of the data. 
