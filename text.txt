@@ -39,6 +39,7 @@ tables
 
 1. library
 Fields:
+
 LibraryID (Primary Key)
 LibraryName
 Location
@@ -57,6 +58,12 @@ UserID (Primary Key)
 UserName
 Password
 Email
+
+library,
+book,
+user,
+transaction,
+hold_queue
 
 4. transactions
 Fields:
@@ -132,3 +139,11 @@ Foreign Key referencing User table
 BookID: NOT NULL (Foreign Key referencing Book table)
 
 These constraints ensure that the essential columns in each table cannot contain NULL values (where specified), and additional constraints like CHECK are applied to guarantee the integrity and validity of the data. 
+
+
+
+library,
+book,
+user,
+transaction,
+hold_queue
