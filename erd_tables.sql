@@ -164,3 +164,18 @@ FROM
 DELIMITER ','
 CSV
 HEADER
+
+-- Question for Report
+
+-- 1. Library Question:
+-- Question: Which library has the highest number of books available?
+
+SELECT 
+    library_id, COUNT(book_id) AS total_books 
+FROM 
+    book
+GROUP BY 
+    library_id 
+ORDER BY 
+    total_books 
+DESC LIMIT 1;
